@@ -12,7 +12,7 @@ double daily_rate(double hourly_rate) {
 // apply_discount calculates the price after a discount
 double apply_discount(double before_discount, double discount) {
     // TODO: Implement a function to calculate the price after a discount.
-    return before_discount - (before_discount*(discount/100));
+    return before_discount - (before_discount * (discount / 100));
 }
 
 // monthly_rate calculates the monthly rate, given an hourly rate and a discount
@@ -20,7 +20,7 @@ double apply_discount(double before_discount, double discount) {
 int monthly_rate(double hourly_rate, double discount) {
     // TODO: Implement a function to calculate the monthly rate, and apply a
     // discount.
-    return std::ceil(apply_discount(daily_rate(hourly_rate) * 22, discount));
+    return std::ceil(apply_discount(daily_rate(hourly_rate)*22,discount));
 }
 
 // days_in_budget calculates the number of workdays given a budget, hourly rate,
@@ -29,5 +29,6 @@ int monthly_rate(double hourly_rate, double discount) {
 int days_in_budget(int budget, double hourly_rate, double discount) {
     // TODO: Implement a function that takes a budget, an hourly rate, and a
     // discount, and calculates how many complete days of work that covers.
-    return (int)budget / (8*(hourly_rate-(hourly_rate*(discount/100))));
+    double daily = apply_discount(daily_rate(hourly_rate), discount);
+    return std::floor((double)budget / daily);
 }
